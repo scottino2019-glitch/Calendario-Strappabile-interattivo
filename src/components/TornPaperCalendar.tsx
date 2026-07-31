@@ -188,7 +188,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
       className="relative w-full max-w-2xl mx-auto py-1 sm:py-4 px-0.5 sm:px-2 transition-all"
     >
       {/* DATE NAVIGATION & QUICK CONTROLS BAR */}
-      <div className="flex items-center justify-between gap-1 mb-2 sm:mb-4 bg-stone-900/95 text-white backdrop-blur-md p-1.5 sm:p-2.5 rounded-2xl shadow-xl border border-stone-700/80 text-xs select-none">
+      <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2 sm:mb-3 bg-stone-900/95 text-white backdrop-blur-md p-1.5 sm:p-2 rounded-2xl shadow-xl border border-stone-700/80 text-xs select-none">
         {/* DATE NAV: IERI, OGGI, DOMANI */}
         <div className="flex items-center gap-1 shrink-0">
           <button
@@ -203,7 +203,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
           <button
             type="button"
             onClick={resetToday}
-            className="px-2 sm:px-3 py-1 sm:py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl font-extrabold transition shadow-xs text-[11px] sm:text-xs cursor-pointer"
+            className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl font-extrabold transition shadow-xs text-[11px] sm:text-xs cursor-pointer"
           >
             Oggi
           </button>
@@ -274,8 +274,8 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
         <div className="absolute bottom-0.5 left-0.5 w-3.5 h-3.5 sm:w-6 sm:h-6 border-b-2 sm:border-b-4 border-l-2 sm:border-l-4 border-amber-400/80 rounded-bl-lg pointer-events-none z-10 opacity-90" />
         <div className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 sm:w-6 sm:h-6 border-b-2 sm:border-b-4 border-r-2 sm:border-r-4 border-amber-400/80 rounded-br-lg pointer-events-none z-10 opacity-90" />
 
-        {/* SIDE INDEX BOOKMARK TABS */}
-        <div className="absolute -right-1.5 sm:-right-3 top-10 bottom-10 flex flex-col justify-around pointer-events-auto z-40">
+        {/* SIDE INDEX BOOKMARK TABS (Hidden on mobile to prevent iframe clip) */}
+        <div className="hidden md:flex absolute -right-2.5 top-10 bottom-10 flex-col justify-around pointer-events-auto z-40">
           {[
             { id: 'today', label: '📅 OGGI', color: '#D97706' },
             { id: 'focus', label: '🎯 OBIETTIVI', color: '#EF4444' },
@@ -289,12 +289,11 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
                 const el = document.getElementById(`agenda-section-${tab.id}`);
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }}
-              className="px-1 sm:px-2.5 py-1 sm:py-2 text-[9px] sm:text-[10px] font-extrabold text-white rounded-r-lg sm:rounded-r-xl shadow-lg border-l border-white/30 transform hover:translate-x-1 transition flex items-center gap-1 uppercase tracking-wider cursor-pointer"
+              className="px-2 py-1 text-[10px] font-extrabold text-white rounded-r-lg shadow-lg border-l border-white/30 transform hover:translate-x-1 transition flex items-center gap-1 uppercase tracking-wider cursor-pointer"
               style={{ backgroundColor: tab.color }}
               title={`Vai a ${tab.label}`}
             >
-              <span className="hidden sm:inline">{tab.label}</span>
-              <span className="sm:hidden">{tab.label.slice(0, 2)}</span>
+              <span>{tab.label}</span>
             </button>
           ))}
         </div>
@@ -472,7 +471,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
               {/* DAILY QUOTE SECTION */}
               {config.agendaContent.showQuote && (
                 <div
-                  className="mb-3 sm:mb-5 p-2.5 sm:p-3 rounded-xl bg-black/5 border-l-4 italic text-xs sm:text-base relative flex gap-2 items-start shadow-xs"
+                  className="mb-3 sm:mb-4 p-2.5 sm:p-3 rounded-xl bg-black/5 border-l-4 italic text-xs sm:text-sm relative flex gap-2 items-start shadow-xs"
                   style={{ borderColor: paperTheme.accentColor }}
                 >
                   <Quote className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 opacity-60 mt-0.5" />
@@ -498,170 +497,179 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
                 </div>
               )}
 
-              {/* MAIN FOCUS / PRIORITY SECTION */}
-              {config.agendaContent.showFocus && (
-                <div id="agenda-section-focus" className="mb-3 sm:mb-5">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[9px] sm:text-[10px] font-black text-white bg-rose-600 px-1.5 py-0.5 rounded-md uppercase tracking-wider shadow-xs">
-                      Priorità #1
-                    </span>
-                    <div
-                      className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider opacity-70 flex items-center gap-1"
-                      style={{ color: paperTheme.accentColor }}
-                    >
-                      <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                      <span>Obiettivo Principale</span>
-                    </div>
-                  </div>
-                  {isEditMode ? (
-                    <input
-                      type="text"
-                      value={config.agendaContent.mainFocus}
-                      onChange={(e) =>
-                        onUpdateConfig({
-                          ...config,
-                          agendaContent: {
-                            ...config.agendaContent,
-                            mainFocus: e.target.value,
-                          },
-                        })
-                      }
-                      className="w-full text-base sm:text-2xl font-bold bg-amber-100/40 p-2 sm:p-2.5 rounded-xl border-b-2 border-red-400 outline-none font-handwriting"
-                      placeholder="Cosa vuoi fare di importante oggi?"
-                    />
-                  ) : (
-                    <div className="text-base sm:text-2xl font-bold bg-amber-100/30 p-2 sm:p-2.5 rounded-xl border-b-2 border-red-300 font-handwriting">
-                      {config.agendaContent.mainFocus}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* TO-DO CHECKLIST SECTION */}
-              {config.agendaContent.showTodos && (
-                <div id="agenda-section-todos" className="mb-3 sm:mb-5">
-                  <div className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider opacity-70 mb-1.5 sm:mb-2.5 flex items-center gap-1.5">
-                    <CheckSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
-                    <span>Cose da fare (Checklist):</span>
-                  </div>
-                  <div className="space-y-1.5 sm:space-y-2">
-                    {config.agendaContent.todos.map((todo) => (
-                      <div
-                        key={todo.id}
-                        className="flex items-start justify-between gap-2 group/todo bg-black/5 hover:bg-black/10 p-1.5 sm:p-2 rounded-xl transition border border-black/5"
-                      >
-                        <button
-                          type="button"
-                          onClick={() => handleToggleTodo(todo.id)}
-                          className="flex items-start gap-2 text-left text-xs sm:text-base font-medium flex-1 cursor-pointer"
+              {/* RESPONSIVE 2-COLUMN CONTENT GRID */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
+                {/* LEFT COLUMN: MAIN FOCUS & NOTES */}
+                <div className="space-y-3 sm:space-y-4">
+                  {/* MAIN FOCUS / PRIORITY SECTION */}
+                  {config.agendaContent.showFocus && (
+                    <div id="agenda-section-focus">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[9px] sm:text-[10px] font-black text-white bg-rose-600 px-1.5 py-0.5 rounded-md uppercase tracking-wider shadow-xs">
+                          Priorità #1
+                        </span>
+                        <div
+                          className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider opacity-70 flex items-center gap-1"
+                          style={{ color: paperTheme.accentColor }}
                         >
-                          {todo.completed ? (
-                            <CheckSquare className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 shrink-0 mt-0.5" />
-                          ) : (
-                            <Square className="w-4 h-4 sm:w-5 sm:h-5 opacity-40 shrink-0 mt-0.5" />
-                          )}
-                          <span
-                            className={
-                              todo.completed ? 'line-through opacity-50' : 'opacity-90 font-semibold'
-                            }
-                          >
-                            {todo.text}
-                          </span>
-                        </button>
-
-                        {isEditMode && (
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteTodo(todo.id)}
-                            className="opacity-0 group-hover/todo:opacity-100 p-1 text-red-500 hover:bg-black/10 rounded-lg transition"
-                          >
-                            <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                          </button>
-                        )}
+                          <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                          <span>Obiettivo Principale</span>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* ADD TODO FORM */}
-                  {isEditMode && (
-                    <form onSubmit={handleAddTodo} className="mt-2 sm:mt-3 flex items-center gap-1.5">
-                      <input
-                        type="text"
-                        value={newTodoText}
-                        onChange={(e) => setNewTodoText(e.target.value)}
-                        placeholder="+ Aggiungi attività..."
-                        className="text-xs sm:text-sm bg-black/5 border border-black/10 px-3 py-1.5 sm:py-2 rounded-xl outline-none flex-1 font-medium placeholder:opacity-50"
-                      />
-                      <button
-                        type="submit"
-                        className="p-1.5 sm:p-2 bg-stone-900 text-white hover:bg-stone-800 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer"
-                      >
-                        <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      </button>
-                    </form>
+                      {isEditMode ? (
+                        <input
+                          type="text"
+                          value={config.agendaContent.mainFocus}
+                          onChange={(e) =>
+                            onUpdateConfig({
+                              ...config,
+                              agendaContent: {
+                                ...config.agendaContent,
+                                mainFocus: e.target.value,
+                              },
+                            })
+                          }
+                          className="w-full text-base sm:text-xl font-bold bg-amber-100/40 p-2 sm:p-2.5 rounded-xl border-b-2 border-red-400 outline-none font-handwriting"
+                          placeholder="Cosa vuoi fare di importante oggi?"
+                        />
+                      ) : (
+                        <div className="text-base sm:text-xl font-bold bg-amber-100/30 p-2 sm:p-2.5 rounded-xl border-b-2 border-red-300 font-handwriting">
+                          {config.agendaContent.mainFocus}
+                        </div>
+                      )}
+                    </div>
                   )}
-                </div>
-              )}
 
-              {/* NOTES & SCRATCHPAD AREA */}
-              {config.agendaContent.showNotes && (
-                <div id="agenda-section-notes" className="mb-3 sm:mb-5">
-                  <div className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider opacity-70 mb-1 sm:mb-1.5">
-                    Note & Appunti:
-                  </div>
-                  {isEditMode ? (
-                    <textarea
-                      value={config.agendaContent.notes}
-                      onChange={(e) =>
-                        onUpdateConfig({
-                          ...config,
-                          agendaContent: {
-                            ...config.agendaContent,
-                            notes: e.target.value,
-                          },
-                        })
-                      }
-                      rows={2}
-                      className="w-full text-xs sm:text-base bg-amber-50/40 border border-black/10 p-2 sm:p-3 rounded-xl outline-none resize-none leading-relaxed font-handwriting"
-                      placeholder="Scrivi le tue note qui..."
-                    />
-                  ) : (
-                    <div className="p-2 sm:p-3 bg-amber-50/30 rounded-xl border border-black/5 text-xs sm:text-base leading-relaxed whitespace-pre-wrap font-handwriting">
-                      {config.agendaContent.notes}
+                  {/* NOTES & SCRATCHPAD AREA */}
+                  {config.agendaContent.showNotes && (
+                    <div id="agenda-section-notes">
+                      <div className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider opacity-70 mb-1 sm:mb-1.5">
+                        Note & Appunti:
+                      </div>
+                      {isEditMode ? (
+                        <textarea
+                          value={config.agendaContent.notes}
+                          onChange={(e) =>
+                            onUpdateConfig({
+                              ...config,
+                              agendaContent: {
+                                ...config.agendaContent,
+                                notes: e.target.value,
+                              },
+                            })
+                          }
+                          rows={3}
+                          className="w-full text-xs sm:text-sm bg-amber-50/40 border border-black/10 p-2 sm:p-2.5 rounded-xl outline-none resize-none leading-relaxed font-handwriting"
+                          placeholder="Scrivi le tue note qui..."
+                        />
+                      ) : (
+                        <div className="p-2 sm:p-2.5 bg-amber-50/30 rounded-xl border border-black/5 text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-handwriting min-h-[60px]">
+                          {config.agendaContent.notes}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
-              )}
 
-              {/* WATER INTAKE TRACKER */}
-              {config.agendaContent.showWater && (
-                <div className="mt-3 pt-3 border-t border-black/10 flex flex-wrap items-center justify-between gap-2 bg-black/5 p-2 sm:p-3 rounded-xl">
-                  <span className="text-[11px] sm:text-xs font-extrabold uppercase opacity-80 flex items-center gap-1">
-                    <Droplet className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-sky-500" />
-                    <span>Acqua Bevuta:</span>
-                  </span>
-                  <div className="flex items-center gap-1 flex-wrap">
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((cup) => {
-                      const isDrunk = cup <= config.agendaContent.waterGlasses;
-                      return (
-                        <button
-                          key={cup}
-                          type="button"
-                          onClick={() => handleSetWater(isDrunk && cup === config.agendaContent.waterGlasses ? cup - 1 : cup)}
-                          className="p-0.5 sm:p-1 hover:scale-125 transition cursor-pointer"
-                          title={`${cup} bicchieri`}
-                        >
-                          <Droplet
-                            className={`w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 ${
-                              isDrunk ? 'text-sky-500 fill-sky-500 drop-shadow-xs' : 'text-stone-300'
-                            }`}
+                {/* RIGHT COLUMN: TODOS & WATER TRACKER */}
+                <div className="space-y-3 sm:space-y-4">
+                  {/* TO-DO CHECKLIST SECTION */}
+                  {config.agendaContent.showTodos && (
+                    <div id="agenda-section-todos">
+                      <div className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider opacity-70 mb-1.5 sm:mb-2 flex items-center gap-1.5">
+                        <CheckSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
+                        <span>Cose da fare (Checklist):</span>
+                      </div>
+                      <div className="space-y-1.5">
+                        {config.agendaContent.todos.map((todo) => (
+                          <div
+                            key={todo.id}
+                            className="flex items-start justify-between gap-2 group/todo bg-black/5 hover:bg-black/10 p-1.5 rounded-xl transition border border-black/5"
+                          >
+                            <button
+                              type="button"
+                              onClick={() => handleToggleTodo(todo.id)}
+                              className="flex items-start gap-2 text-left text-xs sm:text-sm font-medium flex-1 cursor-pointer"
+                            >
+                              {todo.completed ? (
+                                <CheckSquare className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                              ) : (
+                                <Square className="w-4 h-4 opacity-40 shrink-0 mt-0.5" />
+                              )}
+                              <span
+                                className={
+                                  todo.completed ? 'line-through opacity-50' : 'opacity-90 font-semibold'
+                                }
+                              >
+                                {todo.text}
+                              </span>
+                            </button>
+
+                            {isEditMode && (
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteTodo(todo.id)}
+                                className="opacity-0 group-hover/todo:opacity-100 p-1 text-red-500 hover:bg-black/10 rounded-lg transition"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* ADD TODO FORM */}
+                      {isEditMode && (
+                        <form onSubmit={handleAddTodo} className="mt-2 flex items-center gap-1.5">
+                          <input
+                            type="text"
+                            value={newTodoText}
+                            onChange={(e) => setNewTodoText(e.target.value)}
+                            placeholder="+ Aggiungi attività..."
+                            className="text-xs bg-black/5 border border-black/10 px-2.5 py-1.5 rounded-xl outline-none flex-1 font-medium placeholder:opacity-50"
                           />
-                        </button>
-                      );
-                    })}
-                  </div>
+                          <button
+                            type="submit"
+                            className="p-1.5 bg-stone-900 text-white hover:bg-stone-800 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
+                        </form>
+                      )}
+                    </div>
+                  )}
+
+                  {/* WATER INTAKE TRACKER */}
+                  {config.agendaContent.showWater && (
+                    <div className="pt-2 border-t border-black/10 flex flex-wrap items-center justify-between gap-1.5 bg-black/5 p-2 rounded-xl">
+                      <span className="text-[10px] sm:text-[11px] font-extrabold uppercase opacity-80 flex items-center gap-1">
+                        <Droplet className="w-3 h-3 text-sky-500" />
+                        <span>Acqua:</span>
+                      </span>
+                      <div className="flex items-center gap-1 flex-wrap">
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map((cup) => {
+                          const isDrunk = cup <= config.agendaContent.waterGlasses;
+                          return (
+                            <button
+                              key={cup}
+                              type="button"
+                              onClick={() => handleSetWater(isDrunk && cup === config.agendaContent.waterGlasses ? cup - 1 : cup)}
+                              className="p-0.5 hover:scale-125 transition cursor-pointer"
+                              title={`${cup} bicchieri`}
+                            >
+                              <Droplet
+                                className={`w-3.5 h-3.5 ${
+                                  isDrunk ? 'text-sky-500 fill-sky-500 drop-shadow-xs' : 'text-stone-300'
+                                }`}
+                              />
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
 
             {/* BOTTOM TORN JAGGED PAPER SVG EDGE */}

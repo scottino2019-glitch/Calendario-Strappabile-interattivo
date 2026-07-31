@@ -19,7 +19,7 @@ export const EmbedModal: React.FC<EmbedModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [embedWidth, setEmbedWidth] = useState('100%');
-  const [embedHeight, setEmbedHeight] = useState('680');
+  const [embedHeight, setEmbedHeight] = useState('620');
 
   // Compute public shared URL automatically (replacing dev container domain with public shared domain if needed)
   const defaultPublicUrl = typeof window !== 'undefined'
@@ -31,7 +31,7 @@ export const EmbedModal: React.FC<EmbedModalProps> = ({
   if (!isOpen) return null;
 
   const styleWidth = embedWidth === '100%' ? '100%' : `${embedWidth}px`;
-  const maxWidthCss = embedWidth === '100%' ? 'max-width:540px;' : `max-width:${embedWidth}px;`;
+  const maxWidthCss = embedWidth === '100%' ? 'max-width:640px;' : `max-width:${embedWidth}px;`;
 
   const iframeCode = `<iframe 
   src="${targetUrl}" 
