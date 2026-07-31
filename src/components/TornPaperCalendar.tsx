@@ -26,6 +26,7 @@ interface TornPaperCalendarProps {
   currentDate: Date;
   onDateChange: (date: Date) => void;
   isEditMode?: boolean;
+  isMenuOpen?: boolean;
   containerRef?: React.RefObject<HTMLDivElement | null>;
   onOpenMenu?: () => void;
   onOpenEmbed?: () => void;
@@ -38,6 +39,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
   currentDate,
   onDateChange,
   isEditMode = true,
+  isMenuOpen = false,
   containerRef,
   onOpenMenu,
   onOpenEmbed,
@@ -405,6 +407,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
                 onDeleteSticker={handleDeleteSticker}
                 onReorderSticker={handleReorderSticker}
                 isEditMode={isEditMode}
+                isMenuOpen={isMenuOpen}
               />
 
               {/* CUSTOM TITLE / HEADER INSCRIPTION */}

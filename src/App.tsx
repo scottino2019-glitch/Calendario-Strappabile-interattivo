@@ -56,6 +56,7 @@ export default function App() {
           currentDate={currentDate}
           onDateChange={setCurrentDate}
           isEditMode={true}
+          isMenuOpen={isDrawerOpen}
           containerRef={calendarRef}
           onOpenMenu={() => setIsDrawerOpen(true)}
           onOpenEmbed={() => setIsEmbedModalOpen(true)}

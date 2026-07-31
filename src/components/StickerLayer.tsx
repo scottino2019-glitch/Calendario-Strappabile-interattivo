@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Trash2, RotateCw, ArrowUp, ArrowDown, ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Sticker } from '../types';
@@ -9,6 +9,7 @@ interface StickerLayerProps {
   onDeleteSticker: (id: string) => void;
   onReorderSticker: (id: string, direction: 'front' | 'back') => void;
   isEditMode?: boolean;
+  isMenuOpen?: boolean;
 }
 
 export const StickerLayer: React.FC<StickerLayerProps> = ({
@@ -17,9 +18,37 @@ export const StickerLayer: React.FC<StickerLayerProps> = ({
   onDeleteSticker,
   onReorderSticker,
   isEditMode = true,
+  isMenuOpen = false,
 }) => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const layerRef = React.useRef<HTMLDivElement>(null);
+
+  // Automatically clear selected sticker when menu opens or edit mode changes
+  useEffect(() => {
+    if (isMenuOpen || !isEditMode) {
+      setSelectedId(null);
+    }
+  }, [isMenuOpen, isEditMode]);
+
+  // Click / pointer outside listener to deselect sticker
+  useEffect(() => {
+    if (!selectedId) return;
+
+    const handlePointerDownOutside = (e: PointerEvent | MouseEvent | TouchEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target) {
+        const isStickerItem = target.closest('.sticker-item-wrapper') || target.closest('.sticker-floating-toolbar');
+        if (!isStickerItem) {
+          setSelectedId(null);
+        }
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDownOutside);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDownOutside);
+    };
+  }, [selectedId]);
 
   const nudgeSticker = (sticker: Sticker, dx: number, dy: number) => {
     const newX = Math.max(0, Math.min(88, +(sticker.x + dx).toFixed(1)));
@@ -31,21 +60,20 @@ export const StickerLayer: React.FC<StickerLayerProps> = ({
     <div
       ref={layerRef}
       className="absolute inset-0 pointer-events-none overflow-visible z-20"
-      onClick={() => setSelectedId(null)}
     >
       {stickers.map((sticker) => {
-        const isSelected = selectedId === sticker.id;
+        const isSelected = selectedId === sticker.id && !isMenuOpen;
 
         return (
           <motion.div
             key={sticker.id}
-            drag={isEditMode}
+            drag={isEditMode && !isMenuOpen}
             dragConstraints={layerRef}
             dragSnapToOrigin={true}
             dragMomentum={false}
             dragElastic={0}
             onDragStart={() => {
-              if (isEditMode) setSelectedId(sticker.id);
+              if (isEditMode && !isMenuOpen) setSelectedId(sticker.id);
             }}
             onDragEnd={(_, info) => {
               if (!layerRef.current) return;
@@ -72,9 +100,9 @@ export const StickerLayer: React.FC<StickerLayerProps> = ({
             }}
             onClick={(e) => {
               e.stopPropagation();
-              if (isEditMode) setSelectedId(sticker.id);
+              if (isEditMode && !isMenuOpen) setSelectedId(sticker.id);
             }}
-            className="pointer-events-auto cursor-grab active:cursor-grabbing select-none"
+            className="sticker-item-wrapper pointer-events-auto cursor-grab active:cursor-grabbing select-none"
           >
             {/* INNER STICKER CONTAINER WITH ROTATE & SCALE */}
             <div
@@ -153,7 +181,7 @@ export const StickerLayer: React.FC<StickerLayerProps> = ({
             {/* QUICK FLOATING CONTROL MENU FOR SELECTED STICKER */}
             {isSelected && isEditMode && (
               <div
-                className="absolute -top-16 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-stone-900/95 text-white p-1.5 rounded-2xl shadow-2xl border border-stone-700 backdrop-blur-md pointer-events-auto z-50 text-xs whitespace-nowrap cursor-default"
+                className="sticker-floating-toolbar absolute -top-16 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-stone-900/95 text-white p-1.5 rounded-2xl shadow-2xl border border-stone-700 backdrop-blur-md pointer-events-auto z-50 text-xs whitespace-nowrap cursor-default"
                 onPointerDown={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
                 onTouchStart={(e) => e.stopPropagation()}
