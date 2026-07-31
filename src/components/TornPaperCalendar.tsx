@@ -12,7 +12,8 @@ import {
   Droplet, 
   Sparkles,
   Quote,
-  Palette
+  Palette,
+  Code
 } from 'lucide-react';
 import { CalendarConfig, PaperTheme, Sticker } from '../types';
 import { PAPER_THEMES } from '../data/defaults';
@@ -27,6 +28,7 @@ interface TornPaperCalendarProps {
   isEditMode?: boolean;
   containerRef?: React.RefObject<HTMLDivElement | null>;
   onOpenMenu?: () => void;
+  onOpenEmbed?: () => void;
 }
 
 export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
@@ -38,6 +40,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
   isEditMode = true,
   containerRef,
   onOpenMenu,
+  onOpenEmbed,
 }) => {
   const [newTodoText, setNewTodoText] = useState('');
 
@@ -185,41 +188,55 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
       className="relative w-full max-w-xl mx-auto py-6 px-2 sm:px-4 transition-all"
     >
       {/* DATE NAVIGATION & QUICK CONTROLS BAR */}
-      <div className="flex items-center justify-between gap-2 mb-5 bg-stone-900/90 text-white backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-stone-700/80 text-xs sm:text-sm">
-        <div className="flex items-center gap-1.5">
+      <div className="flex items-center justify-between gap-1.5 mb-4 bg-stone-900/95 text-white backdrop-blur-md p-2 rounded-2xl shadow-xl border border-stone-700/80 text-xs select-none">
+        {/* DATE NAV: IERI, OGGI, DOMANI */}
+        <div className="flex items-center gap-1">
           <button
             type="button"
             onClick={prevDay}
-            className="p-1.5 hover:bg-stone-800 rounded-xl text-stone-300 hover:text-white transition flex items-center gap-1 font-bold"
+            className="px-2 py-1.5 hover:bg-stone-800 rounded-xl text-stone-200 hover:text-white transition flex items-center gap-0.5 font-bold"
             title="Giorno Precedente"
           >
-            <ChevronLeft className="w-4 h-4" />
-            <span className="hidden sm:inline">Ieri</span>
+            <ChevronLeft className="w-4 h-4 shrink-0" />
+            <span>Ieri</span>
           </button>
           <button
             type="button"
             onClick={resetToday}
-            className="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl font-extrabold transition text-xs shadow-xs"
+            className="px-2.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl font-extrabold transition shadow-xs text-xs"
           >
             Oggi
           </button>
           <button
             type="button"
             onClick={nextDay}
-            className="p-1.5 hover:bg-stone-800 rounded-xl text-stone-300 hover:text-white transition flex items-center gap-1 font-bold"
+            className="px-2 py-1.5 hover:bg-stone-800 rounded-xl text-stone-200 hover:text-white transition flex items-center gap-0.5 font-bold"
             title="Giorno Successivo"
           >
-            <span className="hidden sm:inline">Domani</span>
-            <ChevronRight className="w-4 h-4" />
+            <span>Domani</span>
+            <ChevronRight className="w-4 h-4 shrink-0" />
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* ACTIONS: STRAPPA, MENU & EMBED */}
+        <div className="flex items-center gap-1.5">
+          {onTearOffPage && (
+            <button
+              type="button"
+              onClick={onTearOffPage}
+              className="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 cursor-pointer"
+              title="Strappa il foglio"
+            >
+              <Scissors className="w-3.5 h-3.5" />
+              <span>Strappa</span>
+            </button>
+          )}
+
           {onOpenMenu && (
             <button
               type="button"
               onClick={onOpenMenu}
-              className="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-stone-950 font-extrabold rounded-xl shadow-md transition flex items-center gap-1.5 active:scale-95 text-xs cursor-pointer"
+              className="px-2.5 py-1.5 bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-stone-950 font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 cursor-pointer"
               title="Apri Menu Personalizzazione"
             >
               <Palette className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -227,14 +244,14 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
             </button>
           )}
 
-          {onTearOffPage && (
+          {onOpenEmbed && (
             <button
               type="button"
-              onClick={onTearOffPage}
-              className="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold rounded-xl shadow-md transition flex items-center gap-1.5 active:scale-95 text-xs cursor-pointer"
+              onClick={onOpenEmbed}
+              className="p-1.5 bg-stone-800 hover:bg-stone-700 text-amber-400 border border-stone-700 rounded-xl transition cursor-pointer"
+              title="Codice Embed iFrame"
             >
-              <Scissors className="w-3.5 h-3.5" />
-              <span>Strappa</span>
+              <Code className="w-3.5 h-3.5" />
             </button>
           )}
         </div>
