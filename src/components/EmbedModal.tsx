@@ -18,8 +18,8 @@ export const EmbedModal: React.FC<EmbedModalProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
-  const [embedWidth, setEmbedWidth] = useState('480');
-  const [embedHeight, setEmbedHeight] = useState('650');
+  const [embedWidth, setEmbedWidth] = useState('100%');
+  const [embedHeight, setEmbedHeight] = useState('680');
 
   // Compute public shared URL automatically (replacing dev container domain with public shared domain if needed)
   const defaultPublicUrl = typeof window !== 'undefined'
@@ -30,11 +30,14 @@ export const EmbedModal: React.FC<EmbedModalProps> = ({
 
   if (!isOpen) return null;
 
+  const styleWidth = embedWidth === '100%' ? '100%' : `${embedWidth}px`;
+  const maxWidthCss = embedWidth === '100%' ? 'max-width:540px;' : `max-width:${embedWidth}px;`;
+
   const iframeCode = `<iframe 
   src="${targetUrl}" 
   width="${embedWidth}" 
   height="${embedHeight}" 
-  style="border:none; overflow:hidden; border-radius:16px;" 
+  style="border:none; width:${styleWidth}; ${maxWidthCss} height:${embedHeight}px; border-radius:20px; overflow:hidden;" 
   title="Calendario Strappabile Interattivo"
 ></iframe>`;
 
@@ -95,37 +98,9 @@ export const EmbedModal: React.FC<EmbedModalProps> = ({
         {/* DIMENSION PRESETS */}
         <div className="mb-4 bg-stone-800/60 p-3 rounded-xl border border-stone-700/50">
           <label className="text-xs font-bold uppercase text-stone-300 block mb-2">
-            Dimensioni Widget:
+            Dimensioni Consigliate Widget:
           </label>
-          <div className="flex gap-2 text-xs">
-            <button
-              type="button"
-              onClick={() => {
-                setEmbedWidth('420');
-                setEmbedHeight('600');
-              }}
-              className={`px-3 py-1.5 rounded-lg border font-medium transition ${
-                embedWidth === '420'
-                  ? 'bg-amber-500 text-stone-950 border-amber-400 font-bold'
-                  : 'bg-stone-800 border-stone-700 hover:bg-stone-700'
-              }`}
-            >
-              Compatto (420x600)
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setEmbedWidth('520');
-                setEmbedHeight('700');
-              }}
-              className={`px-3 py-1.5 rounded-lg border font-medium transition ${
-                embedWidth === '520'
-                  ? 'bg-amber-500 text-stone-950 border-amber-400 font-bold'
-                  : 'bg-stone-800 border-stone-700 hover:bg-stone-700'
-              }`}
-            >
-              Standard (520x700)
-            </button>
+          <div className="flex flex-wrap gap-2 text-xs">
             <button
               type="button"
               onClick={() => {
@@ -138,7 +113,35 @@ export const EmbedModal: React.FC<EmbedModalProps> = ({
                   : 'bg-stone-800 border-stone-700 hover:bg-stone-700'
               }`}
             >
-              Responsive (100%)
+              📱 Responsive Auto (100%)
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setEmbedWidth('360');
+                setEmbedHeight('620');
+              }}
+              className={`px-3 py-1.5 rounded-lg border font-medium transition ${
+                embedWidth === '360'
+                  ? 'bg-amber-500 text-stone-950 border-amber-400 font-bold'
+                  : 'bg-stone-800 border-stone-700 hover:bg-stone-700'
+              }`}
+            >
+              Compatto Mobile (360x620)
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setEmbedWidth('500');
+                setEmbedHeight('700');
+              }}
+              className={`px-3 py-1.5 rounded-lg border font-medium transition ${
+                embedWidth === '500'
+                  ? 'bg-amber-500 text-stone-950 border-amber-400 font-bold'
+                  : 'bg-stone-800 border-stone-700 hover:bg-stone-700'
+              }`}
+            >
+              Standard Desktop (500x700)
             </button>
           </div>
         </div>

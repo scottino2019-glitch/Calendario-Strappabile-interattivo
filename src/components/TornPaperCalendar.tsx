@@ -185,50 +185,50 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-xl mx-auto py-6 px-2 sm:px-4 transition-all"
+      className="relative w-full max-w-lg mx-auto py-2 sm:py-4 px-1 sm:px-3 transition-all"
     >
       {/* DATE NAVIGATION & QUICK CONTROLS BAR */}
-      <div className="flex items-center justify-between gap-1.5 mb-4 bg-stone-900/95 text-white backdrop-blur-md p-2 rounded-2xl shadow-xl border border-stone-700/80 text-xs select-none">
+      <div className="flex items-center justify-between gap-1 mb-3 bg-stone-900/95 text-white backdrop-blur-md p-1.5 sm:p-2 rounded-2xl shadow-xl border border-stone-700/80 text-xs select-none">
         {/* DATE NAV: IERI, OGGI, DOMANI */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 shrink-0">
           <button
             type="button"
             onClick={prevDay}
-            className="px-2 py-1.5 hover:bg-stone-800 rounded-xl text-stone-200 hover:text-white transition flex items-center gap-0.5 font-bold"
+            className="px-1.5 sm:px-2 py-1 sm:py-1.5 hover:bg-stone-800 rounded-xl text-stone-200 hover:text-white transition flex items-center gap-0.5 font-bold cursor-pointer"
             title="Giorno Precedente"
           >
-            <ChevronLeft className="w-4 h-4 shrink-0" />
-            <span>Ieri</span>
+            <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span className="hidden xs:inline text-[11px] sm:text-xs">Ieri</span>
           </button>
           <button
             type="button"
             onClick={resetToday}
-            className="px-2.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl font-extrabold transition shadow-xs text-xs"
+            className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl font-extrabold transition shadow-xs text-[11px] sm:text-xs cursor-pointer"
           >
             Oggi
           </button>
           <button
             type="button"
             onClick={nextDay}
-            className="px-2 py-1.5 hover:bg-stone-800 rounded-xl text-stone-200 hover:text-white transition flex items-center gap-0.5 font-bold"
+            className="px-1.5 sm:px-2 py-1 sm:py-1.5 hover:bg-stone-800 rounded-xl text-stone-200 hover:text-white transition flex items-center gap-0.5 font-bold cursor-pointer"
             title="Giorno Successivo"
           >
-            <span>Domani</span>
-            <ChevronRight className="w-4 h-4 shrink-0" />
+            <span className="hidden xs:inline text-[11px] sm:text-xs">Domani</span>
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
           </button>
         </div>
 
         {/* ACTIONS: STRAPPA, MENU & EMBED */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1 sm:gap-1.5">
           {onTearOffPage && (
             <button
               type="button"
               onClick={onTearOffPage}
-              className="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 cursor-pointer"
+              className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 text-[11px] sm:text-xs cursor-pointer"
               title="Strappa il foglio"
             >
-              <Scissors className="w-3.5 h-3.5" />
-              <span>Strappa</span>
+              <Scissors className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden xs:inline">Strappa</span>
             </button>
           )}
 
@@ -236,11 +236,11 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
             <button
               type="button"
               onClick={onOpenMenu}
-              className="px-2.5 py-1.5 bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-stone-950 font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 cursor-pointer"
+              className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-stone-950 font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 text-[11px] sm:text-xs cursor-pointer"
               title="Apri Menu Personalizzazione"
             >
-              <Palette className="w-3.5 h-3.5 stroke-[2.5]" />
-              <span>Menu</span>
+              <Palette className="w-3.5 h-3.5 stroke-[2.5] shrink-0" />
+              <span className="hidden xs:inline">Menu</span>
             </button>
           )}
 
@@ -248,10 +248,10 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
             <button
               type="button"
               onClick={onOpenEmbed}
-              className="p-1.5 bg-stone-800 hover:bg-stone-700 text-amber-400 border border-stone-700 rounded-xl transition cursor-pointer"
+              className="p-1 sm:p-1.5 bg-stone-800 hover:bg-stone-700 text-amber-400 border border-stone-700 rounded-xl transition cursor-pointer"
               title="Codice Embed iFrame"
             >
-              <Code className="w-3.5 h-3.5" />
+              <Code className="w-3.5 h-3.5 shrink-0" />
             </button>
           )}
         </div>
@@ -259,23 +259,23 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
 
       {/* 3D PHYSICAL AGENDA ORGANIZER COVER BINDER CASING */}
       <div
-        className="relative rounded-[28px] p-4 sm:p-7 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] border-2 border-stone-900/80 transition-all duration-300"
+        className="relative rounded-[22px] sm:rounded-[28px] p-3 sm:p-6 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] border-2 border-stone-900/80 transition-all duration-300"
         style={{
           background: paperTheme.coverBg,
-          boxShadow: `0 25px 60px -15px ${paperTheme.shadowColor}, inset 0 0 40px rgba(0,0,0,0.4)`,
+          boxShadow: `0 20px 50px -15px ${paperTheme.shadowColor}, inset 0 0 30px rgba(0,0,0,0.4)`,
         }}
       >
         {/* LEATHER STITCHED SEAM BORDER */}
-        <div className="absolute inset-2.5 sm:inset-3.5 border-2 border-dashed border-white/20 rounded-[22px] pointer-events-none z-0" />
+        <div className="absolute inset-2 sm:inset-3 border-2 border-dashed border-white/20 rounded-[18px] sm:rounded-[22px] pointer-events-none z-0" />
 
-        {/* METALLIC CORNER PROTECTORS (Top-Left, Top-Right, Bottom-Left, Bottom-Right) */}
-        <div className="absolute top-2 left-2 w-6 h-6 border-t-4 border-l-4 border-amber-400/80 rounded-tl-lg pointer-events-none z-10 opacity-90" />
-        <div className="absolute top-2 right-2 w-6 h-6 border-t-4 border-r-4 border-amber-400/80 rounded-tr-lg pointer-events-none z-10 opacity-90" />
-        <div className="absolute bottom-2 left-2 w-6 h-6 border-b-4 border-l-4 border-amber-400/80 rounded-bl-lg pointer-events-none z-10 opacity-90" />
-        <div className="absolute bottom-2 right-2 w-6 h-6 border-b-4 border-r-4 border-amber-400/80 rounded-br-lg pointer-events-none z-10 opacity-90" />
+        {/* METALLIC CORNER PROTECTORS */}
+        <div className="absolute top-1.5 left-1.5 w-5 h-5 sm:w-6 sm:h-6 border-t-4 border-l-4 border-amber-400/80 rounded-tl-lg pointer-events-none z-10 opacity-90" />
+        <div className="absolute top-1.5 right-1.5 w-5 h-5 sm:w-6 sm:h-6 border-t-4 border-r-4 border-amber-400/80 rounded-tr-lg pointer-events-none z-10 opacity-90" />
+        <div className="absolute bottom-1.5 left-1.5 w-5 h-5 sm:w-6 sm:h-6 border-b-4 border-l-4 border-amber-400/80 rounded-bl-lg pointer-events-none z-10 opacity-90" />
+        <div className="absolute bottom-1.5 right-1.5 w-5 h-5 sm:w-6 sm:h-6 border-b-4 border-r-4 border-amber-400/80 rounded-br-lg pointer-events-none z-10 opacity-90" />
 
-        {/* SIDE INDEX BOOKMARK TABS (Right edge of Binder) */}
-        <div className="absolute -right-3.5 top-16 bottom-16 flex flex-col justify-around pointer-events-auto z-40">
+        {/* SIDE INDEX BOOKMARK TABS (Tucked neatly to avoid cutoff on small screens) */}
+        <div className="absolute -right-2 sm:-right-3 top-12 bottom-12 flex flex-col justify-around pointer-events-auto z-40">
           {[
             { id: 'today', label: '📅 OGGI', color: '#D97706' },
             { id: 'focus', label: '🎯 OBIETTIVI', color: '#EF4444' },
@@ -289,18 +289,19 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
                 const el = document.getElementById(`agenda-section-${tab.id}`);
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }}
-              className="px-2.5 py-2 text-[10px] font-extrabold text-white rounded-r-xl shadow-lg border-l border-white/30 transform hover:translate-x-1 transition flex items-center gap-1 writing-mode-vertical uppercase tracking-wider cursor-pointer"
+              className="px-1.5 sm:px-2.5 py-1.5 sm:py-2 text-[9px] sm:text-[10px] font-extrabold text-white rounded-r-lg sm:rounded-r-xl shadow-lg border-l border-white/30 transform hover:translate-x-1 transition flex items-center gap-1 uppercase tracking-wider cursor-pointer"
               style={{ backgroundColor: tab.color }}
               title={`Vai a ${tab.label}`}
             >
-              <span className="rotate-90 sm:rotate-0">{tab.label}</span>
+              <span className="hidden sm:inline">{tab.label}</span>
+              <span className="sm:hidden">{tab.label.slice(0, 2)}</span>
             </button>
           ))}
         </div>
 
-        {/* SATIN BOOKMARK RIBBON (Hanging down from binder) */}
-        <div className="absolute left-1/2 -bottom-10 -translate-x-1/2 w-4 h-16 bg-gradient-to-b from-amber-600 via-rose-600 to-amber-700 shadow-xl z-30 pointer-events-none rounded-b-sm border-x border-amber-900/40 flex items-end justify-center pb-1">
-          <div className="w-2.5 h-2.5 rounded-full bg-amber-300 border border-amber-800 shadow-xs" />
+        {/* SATIN BOOKMARK RIBBON */}
+        <div className="absolute left-1/2 -bottom-5 -translate-x-1/2 w-3.5 h-10 bg-gradient-to-b from-amber-600 via-rose-600 to-amber-700 shadow-md z-30 pointer-events-none rounded-b-sm border-x border-amber-900/40 flex items-end justify-center pb-1">
+          <div className="w-2 h-2 rounded-full bg-amber-300 border border-amber-800 shadow-xs" />
         </div>
 
         {/* PHYSICAL BINDER RING MECHANISM (Top Metallic Rings) */}

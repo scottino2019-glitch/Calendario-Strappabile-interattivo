@@ -46,9 +46,9 @@ export default function App() {
   const canvasTheme = CANVAS_THEMES.find((c) => c.id === config.canvasThemeId) || CANVAS_THEMES[0];
 
   return (
-    <div className={`min-h-screen w-full flex flex-col items-center justify-center p-2 sm:p-4 transition-colors duration-500 font-sans-clean select-none ${canvasTheme.bgClass}`}>
+    <div className={`min-h-screen w-full flex flex-col items-center justify-center p-1 sm:p-4 overflow-x-hidden transition-colors duration-500 font-sans-clean select-none ${canvasTheme.bgClass}`}>
       {/* PURE AGENDA WIDGET CONTAINER */}
-      <main className="w-full max-w-xl mx-auto my-auto relative">
+      <main className="w-full max-w-lg mx-auto my-auto relative">
         <TornPaperCalendar
           config={config}
           onUpdateConfig={setConfig}
