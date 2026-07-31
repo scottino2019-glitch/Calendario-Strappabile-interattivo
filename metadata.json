@@ -1,0 +1,6 @@
+{
+  "name": "Calendario Strappabile Interattivo",
+  "description": "Mini calendario giornaliero ad effetto foglio di carta strappata con personalizzazione di temi, colori, testo e stickers trascinabili.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

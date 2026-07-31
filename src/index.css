@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Fredoka:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+@layer utilities {
+  .font-handwriting {
+    font-family: 'Caveat', 'Dancing Script', cursive, sans-serif;
+  }
+  .font-typewriter {
+    font-family: 'Courier Prime', 'Courier New', monospace;
+  }
+  .font-serif-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .font-sans-clean {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  .font-playful {
+    font-family: 'Fredoka', cursive, sans-serif;
+  }
+}
+
+/* Background Paper Patterns */
+.bg-pattern-lines {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 23px,
+    var(--paper-lines-color, rgba(180, 160, 130, 0.25)) 24px
+  );
+  background-position: 0 8px;
+}
+
+.bg-pattern-grid {
+  background-image: 
+    linear-gradient(to right, var(--paper-lines-color, rgba(180, 160, 130, 0.2)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--paper-lines-color, rgba(180, 160, 130, 0.2)) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-pattern-dots {
+  background-image: radial-gradient(var(--paper-lines-color, rgba(180, 160, 130, 0.35)) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Paper Fiber Texture */
+.paper-texture {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-size: 4px 4px;
+}
+
+/* Realistic Torn Paper Drop Shadow & Fiber Effects */
+.torn-paper-shadow {
+  filter: drop-shadow(0 15px 22px rgba(0, 0, 0, 0.22)) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.12));
+}
+
+.torn-paper-stack-1 {
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.15));
+}
+
+.torn-paper-polygon {
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 95%, 
+    97% 92%, 94% 96%, 91% 91%, 88% 95%, 85% 90%, 82% 94%, 79% 89%, 76% 93%, 73% 88%, 70% 92%, 
+    67% 87%, 64% 91%, 61% 86%, 58% 90%, 55% 85%, 52% 89%, 49% 84%, 46% 88%, 43% 83%, 40% 87%, 
+    37% 82%, 34% 86%, 31% 81%, 28% 85%, 25% 80%, 22% 84%, 19% 79%, 16% 83%, 13% 78%, 10% 82%, 
+    7% 77%, 4% 81%, 0% 76%
+  );
+}
+
+.paper-corner-curl {
+  background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0.15) 100%);
+}
+
+.sticker-float {
+  filter: drop-shadow(2px 3px 3px rgba(0,0,0,0.18));
+}
+
+/* Custom Dragging outline */
+.sticker-selected {
+  outline: 2px dashed #3b82f6;
+  outline-offset: 4px;
+}
+
+/* Custom scrollbars for drawer */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.5);
+}
