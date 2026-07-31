@@ -185,10 +185,10 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-xl mx-auto py-1 sm:py-4 px-1 sm:px-3 transition-all"
+      className="relative w-full max-w-2xl mx-auto py-1 sm:py-4 px-0.5 sm:px-2 transition-all"
     >
       {/* DATE NAVIGATION & QUICK CONTROLS BAR */}
-      <div className="flex items-center justify-between gap-1 mb-2.5 sm:mb-4 bg-stone-900/95 text-white backdrop-blur-md p-1.5 sm:p-2 rounded-2xl shadow-xl border border-stone-700/80 text-xs select-none">
+      <div className="flex items-center justify-between gap-1 mb-2 sm:mb-4 bg-stone-900/95 text-white backdrop-blur-md p-1.5 sm:p-2.5 rounded-2xl shadow-xl border border-stone-700/80 text-xs select-none">
         {/* DATE NAV: IERI, OGGI, DOMANI */}
         <div className="flex items-center gap-1 shrink-0">
           <button
@@ -203,7 +203,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
           <button
             type="button"
             onClick={resetToday}
-            className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl font-extrabold transition shadow-xs text-[11px] sm:text-xs cursor-pointer"
+            className="px-2 sm:px-3 py-1 sm:py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl font-extrabold transition shadow-xs text-[11px] sm:text-xs cursor-pointer"
           >
             Oggi
           </button>
@@ -224,11 +224,11 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
             <button
               type="button"
               onClick={onTearOffPage}
-              className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 text-[11px] sm:text-xs cursor-pointer"
+              className="px-2 sm:px-3 py-1 sm:py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 text-[11px] sm:text-xs cursor-pointer"
               title="Strappa il foglio"
             >
               <Scissors className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden xs:inline">Strappa</span>
+              <span>Strappa</span>
             </button>
           )}
 
@@ -236,7 +236,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
             <button
               type="button"
               onClick={onOpenMenu}
-              className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-stone-950 font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 text-[11px] sm:text-xs cursor-pointer"
+              className="px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-stone-950 font-extrabold rounded-xl shadow-md transition flex items-center gap-1 active:scale-95 text-[11px] sm:text-xs cursor-pointer"
               title="Apri Menu Personalizzazione"
             >
               <Palette className="w-3.5 h-3.5 stroke-[2.5] shrink-0" />
@@ -259,23 +259,23 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
 
       {/* 3D PHYSICAL AGENDA ORGANIZER COVER BINDER CASING */}
       <div
-        className="relative rounded-[20px] sm:rounded-[28px] p-2.5 sm:p-6 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] border-2 border-stone-900/80 transition-all duration-300"
+        className="relative rounded-[16px] sm:rounded-[28px] p-1.5 sm:p-5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] border-2 border-stone-900/80 transition-all duration-300"
         style={{
           background: paperTheme.coverBg,
           boxShadow: `0 20px 50px -15px ${paperTheme.shadowColor}, inset 0 0 30px rgba(0,0,0,0.4)`,
         }}
       >
         {/* LEATHER STITCHED SEAM BORDER */}
-        <div className="absolute inset-1.5 sm:inset-3 border-2 border-dashed border-white/20 rounded-[16px] sm:rounded-[22px] pointer-events-none z-0" />
+        <div className="absolute inset-1 sm:inset-3 border-2 border-dashed border-white/20 rounded-[14px] sm:rounded-[22px] pointer-events-none z-0" />
 
         {/* METALLIC CORNER PROTECTORS */}
-        <div className="absolute top-1 left-1 w-4 h-4 sm:w-6 sm:h-6 border-t-4 border-l-4 border-amber-400/80 rounded-tl-lg pointer-events-none z-10 opacity-90" />
-        <div className="absolute top-1 right-1 w-4 h-4 sm:w-6 sm:h-6 border-t-4 border-r-4 border-amber-400/80 rounded-tr-lg pointer-events-none z-10 opacity-90" />
-        <div className="absolute bottom-1 left-1 w-4 h-4 sm:w-6 sm:h-6 border-b-4 border-l-4 border-amber-400/80 rounded-bl-lg pointer-events-none z-10 opacity-90" />
-        <div className="absolute bottom-1 right-1 w-4 h-4 sm:w-6 sm:h-6 border-b-4 border-r-4 border-amber-400/80 rounded-br-lg pointer-events-none z-10 opacity-90" />
+        <div className="absolute top-0.5 left-0.5 w-3.5 h-3.5 sm:w-6 sm:h-6 border-t-2 sm:border-t-4 border-l-2 sm:border-l-4 border-amber-400/80 rounded-tl-lg pointer-events-none z-10 opacity-90" />
+        <div className="absolute top-0.5 right-0.5 w-3.5 h-3.5 sm:w-6 sm:h-6 border-t-2 sm:border-t-4 border-r-2 sm:border-r-4 border-amber-400/80 rounded-tr-lg pointer-events-none z-10 opacity-90" />
+        <div className="absolute bottom-0.5 left-0.5 w-3.5 h-3.5 sm:w-6 sm:h-6 border-b-2 sm:border-b-4 border-l-2 sm:border-l-4 border-amber-400/80 rounded-bl-lg pointer-events-none z-10 opacity-90" />
+        <div className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 sm:w-6 sm:h-6 border-b-2 sm:border-b-4 border-r-2 sm:border-r-4 border-amber-400/80 rounded-br-lg pointer-events-none z-10 opacity-90" />
 
         {/* SIDE INDEX BOOKMARK TABS */}
-        <div className="absolute -right-2 sm:-right-3 top-10 bottom-10 flex flex-col justify-around pointer-events-auto z-40">
+        <div className="absolute -right-1.5 sm:-right-3 top-10 bottom-10 flex flex-col justify-around pointer-events-auto z-40">
           {[
             { id: 'today', label: '📅 OGGI', color: '#D97706' },
             { id: 'focus', label: '🎯 OBIETTIVI', color: '#EF4444' },
@@ -305,12 +305,12 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
         </div>
 
         {/* PHYSICAL BINDER RING MECHANISM (Top Metallic Rings) */}
-        <div className="w-full flex justify-around items-center px-4 sm:px-8 -mb-4 sm:-mb-5 z-40 relative">
+        <div className="w-full flex justify-around items-center px-3 sm:px-8 -mb-3.5 sm:-mb-5 z-40 relative">
           {[1, 2, 3, 4, 5, 6].map((idx) => (
             <div key={idx} className="flex flex-col items-center">
               {/* Ring metallic arc */}
               <div
-                className={`w-3.5 sm:w-4 h-6 sm:h-8 rounded-t-full shadow-2xl border ${
+                className={`w-3 sm:w-4 h-5 sm:h-8 rounded-t-full shadow-2xl border ${
                   paperTheme.ringColor === 'gold'
                     ? 'bg-gradient-to-r from-amber-400 via-yellow-100 to-amber-600 border-amber-700'
                     : paperTheme.ringColor === 'rose-gold'
@@ -322,7 +322,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
                     : 'bg-gradient-to-r from-stone-300 via-white to-stone-500 border-stone-600'
                 }`}
               />
-              <div className="w-4 sm:w-5 h-1.5 bg-black/40 rounded-full blur-xs -mt-1" />
+              <div className="w-3.5 sm:w-5 h-1.5 bg-black/40 rounded-full blur-xs -mt-1" />
             </div>
           ))}
         </div>
@@ -331,7 +331,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
         <div className="relative group torn-paper-shadow my-1 sm:my-2">
           {/* UNDERLYING STACK PAGE 2 */}
           <div
-            className="absolute inset-x-1 inset-y-1.5 rounded-t-sm transform rotate-1 translate-y-1 shadow-sm pointer-events-none opacity-90 transition-transform"
+            className="absolute inset-x-1 inset-y-1 rounded-t-sm transform rotate-1 translate-y-1 shadow-sm pointer-events-none opacity-90 transition-transform"
             style={{ backgroundColor: paperTheme.paperBg, filter: 'brightness(0.94)' }}
           >
             <div className="absolute bottom-0 left-0 right-0 h-3 overflow-hidden">
@@ -343,7 +343,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
 
           {/* UNDERLYING STACK PAGE 1 */}
           <div
-            className="absolute inset-x-0.5 inset-y-1 rounded-t-sm transform -rotate-0.5 translate-y-1 shadow-xs pointer-events-none opacity-95 transition-transform"
+            className="absolute inset-x-0.5 inset-y-0.5 rounded-t-sm transform -rotate-0.5 translate-y-0.5 shadow-xs pointer-events-none opacity-95 transition-transform"
             style={{ backgroundColor: paperTheme.paperBg, filter: 'brightness(0.97)' }}
           />
 
@@ -359,7 +359,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
             }}
           >
             {/* PERFORATED BINDER RING HOLE PUNCHES ALONG TOP MARGIN */}
-            <div className="w-full flex justify-around items-center px-4 sm:px-8 pt-2 pb-1 relative z-30 pointer-events-none">
+            <div className="w-full flex justify-around items-center px-3 sm:px-8 pt-2 pb-1 relative z-30 pointer-events-none">
               {[1, 2, 3, 4, 5, 6].map((idx) => (
                 <div
                   key={idx}
@@ -368,13 +368,13 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
               ))}
             </div>
 
-            {/* NOTEBOOK MARGIN GUIDES */}
-            <div className="absolute left-5 sm:left-12 top-0 bottom-0 w-0.5 bg-rose-400/35 pointer-events-none z-10" />
+            {/* NOTEBOOK MARGIN GUIDES (Visible on desktop only) */}
+            <div className="hidden sm:block absolute left-12 top-0 bottom-0 w-0.5 bg-rose-400/35 pointer-events-none z-10" />
 
             {/* CALENDAR HEADER (Month, Day Number, Day Name) */}
             <div
               id="agenda-section-today"
-              className="w-full px-4 sm:px-6 pt-2 sm:pt-3 pb-3 sm:pb-5 text-center relative shadow-sm border-b border-black/5"
+              className="w-full px-3 sm:px-6 pt-2 sm:pt-3 pb-3 sm:pb-5 text-center relative shadow-sm border-b border-black/5"
               style={{
                 backgroundColor: paperTheme.headerBg,
                 color: paperTheme.headerTextColor,
@@ -395,7 +395,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
             </div>
 
             {/* PAGE CONTENT CONTAINER WITH CUSTOM PATTERN & TEXTURE */}
-            <div className={`p-4 sm:p-8 min-h-[300px] sm:min-h-[460px] relative ${patternClass}`}>
+            <div className={`p-3.5 sm:p-7 min-h-[280px] sm:min-h-[440px] relative ${patternClass}`}>
               {/* PAPER FIBERS & LIGHT NOISE OVERLAY */}
               <div className="absolute inset-0 paper-texture pointer-events-none opacity-40" />
 
@@ -409,7 +409,7 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
               />
 
               {/* CUSTOM TITLE / HEADER INSCRIPTION */}
-              <div className="mb-3 sm:mb-5 border-b-2 border-dashed border-black/10 pb-1.5 sm:pb-2 flex items-center justify-between gap-2">
+              <div className="mb-3 sm:mb-5 border-b-2 border-dashed border-black/10 pb-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                 {isEditMode ? (
                   <input
                     type="text"
@@ -432,15 +432,15 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
                 )}
 
                 {/* MOOD & WEATHER SELECTOR DISPLAYS */}
-                <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 flex-wrap">
                   {config.agendaContent.showWeather && (
-                    <div className="flex items-center gap-0.5 sm:gap-1 bg-black/5 px-1.5 py-0.5 rounded-full text-xs sm:text-sm">
+                    <div className="flex items-center gap-1 bg-black/5 px-2 py-0.5 rounded-full text-xs sm:text-sm">
                       {['☀️', '🌤️', '🌧️', '☕', '⚡'].map((w) => (
                         <button
                           key={w}
                           type="button"
                           onClick={() => handleSetWeather(w)}
-                          className={`hover:scale-125 transition ${
+                          className={`hover:scale-125 transition cursor-pointer ${
                             config.agendaContent.weather === w ? 'scale-125 font-bold' : 'opacity-50'
                           }`}
                         >
@@ -451,13 +451,13 @@ export const TornPaperCalendar: React.FC<TornPaperCalendarProps> = ({
                   )}
 
                   {config.agendaContent.showMood && (
-                    <div className="flex items-center gap-0.5 sm:gap-1 bg-black/5 px-1.5 py-0.5 rounded-full text-xs sm:text-sm">
+                    <div className="flex items-center gap-1 bg-black/5 px-2 py-0.5 rounded-full text-xs sm:text-sm">
                       {['😊', '🥰', '😌', '🤔', '😴'].map((m) => (
                         <button
                           key={m}
                           type="button"
                           onClick={() => handleSetMood(m)}
-                          className={`hover:scale-125 transition ${
+                          className={`hover:scale-125 transition cursor-pointer ${
                             config.agendaContent.mood === m ? 'scale-125 font-bold' : 'opacity-50'
                           }`}
                         >

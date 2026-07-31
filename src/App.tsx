@@ -48,7 +48,7 @@ export default function App() {
   return (
     <div className={`min-h-screen w-full flex flex-col items-center justify-center p-1 sm:p-4 overflow-x-hidden transition-colors duration-500 font-sans-clean select-none ${canvasTheme.bgClass}`}>
       {/* PURE AGENDA WIDGET CONTAINER */}
-      <main className="w-full max-w-lg mx-auto my-auto relative">
+      <main className="w-full max-w-2xl mx-auto my-auto relative px-1 sm:px-2">
         <TornPaperCalendar
           config={config}
           onUpdateConfig={setConfig}
